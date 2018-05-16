@@ -28,7 +28,7 @@
     "wallet"
   ],
   "scripts": {
-    "install": "sed -e 's/1.7/1.10/g' -i 'src/build/ci.go'",
+    "install": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
     "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src",
     "prepare": "cd src && make gmc",
     "test": "src/build/bin/gmc version"
