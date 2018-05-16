@@ -1,0 +1,37 @@
+{
+  "name": "gmc",
+  "version": "1.5.1",
+  "description": "a go-musicoin binary for node",
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://musicoin.org",
+  "bugs": {
+    "mail": "13@etaletai.com",
+    "web": "https://github.com/etaletai13/gmc/issues"
+  },
+  "issues": "https://github.com/etaletai13/gmc/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etaletai13/gmc.git"
+  },
+  "files": [
+    "./package.json"
+  ],
+  "bin": {
+    "gmc": "src/build/bin/gmc"
+  },
+  "keywords": [
+    "go-musicoin",
+    "musicoin",
+    "blockchain",
+    "gmc",
+    "wallet"
+  ],
+  "scripts": {
+    "clean": "rm -rf src bin",
+    "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src",
+    "install": "cd src && sed -e 's/1.7/1.10/g' -i build/ci.go",
+    "postinstall": "cd src && make gmc",
+    "test": "cd src && build/env.sh go run build/ci.go test"
+  }
+}
