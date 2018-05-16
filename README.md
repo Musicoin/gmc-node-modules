@@ -1,3 +1,6 @@
+![Travis](https://img.shields.io/travis/etaletai13/gmc.svg?style=for-the-badge)
+
+
 ## Go Musicoin
 
 Official golang implementation of the Ethereum-based Musicoin protocol.
