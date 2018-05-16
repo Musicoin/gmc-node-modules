@@ -14,12 +14,8 @@
     "type": "git",
     "url": "https://github.com/etaletai13/gmc.git"
   },
-  "files": [
-    "./package.json"
-  ],
-  "bin": {
-    "gmc": "src/build/bin/gmc"
-  },
+  "bin": [ "bin/gmc" ],
+  "exclude": [ "src/" ],
   "keywords": [
     "go-musicoin",
     "musicoin",
@@ -28,9 +24,10 @@
     "wallet"
   ],
   "scripts": {
-    "install": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
+    "build": "cd src && make gmc",
+    "install": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go && yarn build",
+    "postinstall": "mv src/build/bin .",
     "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src",
-    "prepare": "cd src && make gmc",
-    "test": "src/build/bin/gmc version"
+    "test": "bin/gmc version"
   }
 }
