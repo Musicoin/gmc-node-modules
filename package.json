@@ -32,6 +32,6 @@
     "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src",
     "install": "cd src && sed -e 's/1.7/1.10/g' -i build/ci.go",
     "postinstall": "cd src && make gmc",
-    "test": "cd src && build/env.sh go run build/ci.go test"
+    "test": "src/build/bin/gmc"
   }
 }
