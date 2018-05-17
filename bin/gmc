@@ -1,0 +1,1 @@
+echo "It looks like gmc failed to build." && exit 1
