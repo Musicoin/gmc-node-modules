@@ -25,11 +25,11 @@
     "wallet"
   ],
   "scripts": {
+    "install": "yarn clone && yarn patch && yarn buil && yarn build && yarn clean",
     "build": "cd src && make gmc && yarn copy",
-    "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go && yarn build",
-    "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src && yarn prep",
-    "prep": "yarn patch && yarn build",
-    "postinstall": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
+    "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
+    "clone": "git clone https://github.com/Musicoin/go-musicoin.git src && yarn prep",
+    "clean": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
     "test": "./bin/gmc version"
   }
 }
