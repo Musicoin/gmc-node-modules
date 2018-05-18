@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "install": "yarn clone && yarn patch && yarn build && yarn clean",
-    "build": "cd src && make gmc && yarn copy",
+    "build": "cd src && make gmc",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
     "clone": "git clone https://github.com/Musicoin/go-musicoin.git src",
     "clean": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
