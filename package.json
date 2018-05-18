@@ -26,10 +26,10 @@
   ],
   "scripts": {
     "build": "cd src && make gmc && yarn copy",
-    "install": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go && yarn build",
-    "prepare": "rm -rf src",
+    "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go && yarn build",
     "preinstall": "git clone https://github.com/Musicoin/go-musicoin.git src",
-    "copy": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
+    "prepare": "yarn patch && yarn build",
+    "postinstall": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
     "test": "./bin/gmc version"
   }
 }
