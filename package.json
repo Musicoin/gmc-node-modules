@@ -17,6 +17,9 @@
   "bin": {
     "gmc": "./bin/gmc"
   },
+  "engines": {
+    "yarn": ">=1.7.0"
+  },
   "keywords": [
     "go-musicoin",
     "musicoin",
@@ -25,11 +28,12 @@
     "wallet"
   ],
   "scripts": {
-    "install": "yarn clone && yarn patch && yarn build && yarn clean",
+    "install": "yarn clean && yarn clone && yarn patch && yarn build && yarn finish",
     "build": "cd src && make gmc",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
-    "clone": "git clone https://github.com/Musicoin/go-musicoin.git src",
-    "clean": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
+    "clean": "rm -rf {src,bin/gmc,*tmp}",
+    "clone": "echo 'getting source...\n' & git clone https://github.com/Musicoin/go-musicoin.git src && echo '√'",
+    "finish": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
     "test": "./bin/gmc version"
   }
 }
