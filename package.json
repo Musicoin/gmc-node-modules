@@ -28,7 +28,7 @@
     "wallet"
   ],
   "scripts": {
-    "preinstall": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; fi && yarn clean & yarn patch",
+    "preinstall": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; else yarn clean; fi",
     "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
     "install": "sh ./index.sh",

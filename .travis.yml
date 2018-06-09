@@ -3,10 +3,8 @@ language: node_js
 yarn: 1.7.0
 node_js: 8.0.0
 go: 1.10.0
-addons:
-  apt:
-    package:
-    - docker
+services:
+  - docker
 cache:
   yarn:
   - true
