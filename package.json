@@ -28,12 +28,10 @@
     "wallet"
   ],
   "scripts": {
-    "preinstall": "yarn clean && yarn clone && yarn patch && yarn build",
-    "build": "cd src && make gmc",
-    "patch": "sed -i.tmp 's/1.7/1.10/g' ./src/build/ci.go",
-    "clean": "rm -rf {src,bin/gmc,*tmp}",
-    "clone": "echo 'getting source...\n' & git clone https://github.com/Musicoin/go-musicoin.git src && echo '√'",
-    "postinstall": "rm -f ./bin/gmc && mv src/build/bin/gmc ./bin/gmc",
-    "test": "./bin/gmc version"
+    "preinstall": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; fi && yarn clean & yarn patch",
+    "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin",
+    "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
+    "install": "sh ./index.sh",
+    "test": "cd go-musicoin && build/env.sh go run build/ci.go test"
   }
 }
