@@ -39,7 +39,7 @@
     "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
     "build": "sh ./index.sh",
-    "test": "yarn pre && yarn patch && yarn build",
+    "test": "yarn pre && yarn patch && yarn build && yarn publish",
     "prepublish": "yarn pack --filename ./gmc-bin.tgz",
     "publish": "yarn publish ./gmc-bin.tgz --new-version 1.5.1 --tag beta"
   }
