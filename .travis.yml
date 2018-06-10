@@ -12,6 +12,8 @@ before_install:
 before_deploy:
 - git config --local user.name "etaletai13"
 - git config --local user.email "13@etaletai.com"
+- git commit gmc-bin.tgz -m "1.0.0 build"
+- git tag "v1.0.0-beta"
 deploy:
   provider: releases
   api_key:
