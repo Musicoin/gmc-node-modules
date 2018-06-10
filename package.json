@@ -1,40 +1,46 @@
 {
-  "name": "musicoin-daemon",
+  "name": "@etaletai/gmc-bin",
   "version": "1.5.1",
-  "description": "a go-musicoin binary for node",
+  "description": "makes available go-musicoin binaries in node projects",
   "license": "MIT",
   "private": false,
   "homepage": "https://musicoin.org",
   "bugs": {
     "mail": "13@etaletai.com",
-    "web": "https://github.com/etaletai13/gmc/issues"
+    "web": "https://github.com/Musicoin/desktop/issues"
   },
-  "issues": "https://github.com/etaletai13/gmc/issues",
+  "issues": "https://github.com/Musicoin/desktop/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/etaletai13/gmc.git"
+    "url": "https://github.com/Musicoin/gmc-node-modules.git"
   },
   "bin": {
     "gmc-linux-386": "./go-musicoin/build/bin/gmc-linux-386",
-    "gmc-linux-amd64": "./go-musicoin/build/bin/gmc-linux-amd64",
+    "gmc-linux": "./go-musicoin/build/bin/gmc-linux-amd64",
+    "gmc-mac": "./go-musicoin/build/bin/gmc-darwin-10.6-amd64",
     "gmc-windows-386": "./go-musicoin/build/bin/gmc-windows-4.0-386.exe",
-    "gmc-windows-amd64": "./go-musicoin/build/bin/gmc-windows-4.0-amd64"
+    "gmc-windows": "./go-musicoin/build/bin/gmc-windows-4.0-amd64.exe"
   },
   "engines": {
     "yarn": ">=1.7.0"
   },
   "keywords": [
-    "go-musicoin",
-    "musicoin",
     "blockchain",
+    "crypto",
     "gmc",
+    "gmc-bin",
+    "go-musicoin",
+    "music",
+    "musicoin",
     "wallet"
   ],
   "scripts": {
-    "preinstall": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; else yarn clean; fi",
-    "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin",
+    "pre": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; else yarn clean; fi",
+    "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
-    "install": "sh ./index.sh",
-    "test": "ls go-musicoin/build/bin"
+    "build": "sh ./index.sh",
+    "test": "yarn pre && yarn patch && yarn build",
+    "prepublish": "yarn pack --filename ./gmc-bin.tgz",
+    "publish": "yarn publish ./gmc-bin.tgz --new-version 1.5.1 --tag beta"
   }
 }
