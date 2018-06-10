@@ -2,21 +2,27 @@ os: linux
 language: node_js
 yarn: 1.7.0
 node_js: 8.0.0
-go: 1.10.0
-addons:
-  apt:
-    package:
-    - docker
-cache:
-  yarn:
-  - true
+go: 
+- 1.10.x
+services:
+- docker
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-  - export PATH="$HOME/.yarn/bin:$PATH"
-deploy:
-  provider: releases
-  api_key:
-    secure: bhbcdeWp4hm+/9mMavSSQXJXIQJzoNWVOEEMfhKOFuXbYoGmYxpqbY5tQVb8q/PGODJhfQJiYRStJfS8dLzO7InTUvqxeh3eoKk5VQ4Rz08W7JGCueAJYoOHAA8odTEHsP3UBD0uAO0waGlwoS0XhQ9AKeOXMkD8nbc3rq+qv3kByzfG0fb7YEaUCa7g6tisARPxI6IlmLvYjwYaVQltGYlxfjjV2Q9Uphjlfl/aIDnDtYB8t5WCT1qL+O9KFl53BEhtfbu3TTVS6c0KMEAY1uv+UupPbYHJrYXLRN/0AJ4yN1bcxm8yQfR0AOjmZtR2LXBTqyV1mRvtVb6QeKlwPOBKpHZyErOFPBDFxAdcidsgQxX4l6N0DScM/Ev8OA9AtojxRlmwvg9EFKtp7FLJlHl58b1qXsg0fnP/3uisckIn5EdUIaYEuRC7M05bISsT9qXjf519Bvxv2Xz2fwQPgTX6mvQUOqZvjyUFhH30bNgcLiLi+exbp8iXcXma6bAmsl3i9kFSAwV9DrZBZk1R0mnnAss1p3J3rHh9tHAEkEhfAbwM2o4bIvnk4b9qT3nYwDJbpPt7vxIq8vp8j0Vpr6rQI/9IHv3zgMWz2leWHacK1GrTiNw706MxejrxAzfPz6DzTZdtVaGkNrkDSExCvSm1o4UccUqix6/ML1M7rXs=
-  file: "./bin/"
-  on:
-    repo: etaletai13/gmc-node-modules
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+- export PATH="$HOME/.yarn/bin:$PATH"
+before_deploy:
+- git config --local user.name "etaletai13"
+- git config --local user.email "13@etaletai.com"
+- git add go-musicoin/build/bin/gmc* -f
+jobs:
+  include:
+  -  stage: Github Release
+     node_js: 8.0.0
+     script: echo "Creating Github Release ..."
+     deploy:
+       provider: releases
+       api_key:
+         secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
+         file: "./gmc-bin.tgz"
+         skip_cleanup: true
+         on:
+           tags: true
