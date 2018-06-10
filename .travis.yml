@@ -12,12 +12,11 @@ before_install:
 before_deploy:
 - git config --local user.name "etaletai13"
 - git config --local user.email "13@etaletai.com"
-- git commit gmc-bin.tgz -m "1.0.0 build"
-- git tag "v1.0.0-beta"
 deploy:
   provider: releases
   api_key:
     secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
   file: "./gmc-bin.tgz"
+  skip_cleanup: true
   on:
     tags: true
