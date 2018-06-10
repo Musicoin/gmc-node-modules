@@ -13,3 +13,7 @@ echo "\n\nBuilding Linux binaries"
 build/env.sh go run build/ci.go xgo -- --targets=linux/386 -v ./cmd/gmc && echo "Linux x32 compiled."
 
 build/env.sh go run build/ci.go xgo -- --targets=linux/amd64 -v ./cmd/gmc && echo "Linux x64 compiled."
+
+echo "\n\nBuilding Mac binaries"
+
+build/env.sh go run build/ci.go xgo -- --targets=darwin/amd64 -v ./cmd/gmc && echo "Mac compiled."

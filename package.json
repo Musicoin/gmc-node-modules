@@ -15,7 +15,10 @@
     "url": "https://github.com/etaletai13/gmc.git"
   },
   "bin": {
-    "gmc": "./bin/gmc"
+    "gmc-linux-386": "./go-musicoin/build/bin/gmc-linux-386",
+    "gmc-linux-amd64": "./go-musicoin/build/bin/gmc-linux-amd64",
+    "gmc-windows-386": "./go-musicoin/build/bin/gmc-windows-4.0-386.exe",
+    "gmc-windows-amd64": "./go-musicoin/build/bin/gmc-windows-4.0-amd64"
   },
   "engines": {
     "yarn": ">=1.7.0"
