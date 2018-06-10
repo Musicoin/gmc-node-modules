@@ -12,7 +12,7 @@ before_install:
 before_deploy:
 - git config --local user.name "etaletai13"
 - git config --local user.email "13@etaletai.com"
-- git add go-musicoin/build/bin/gmc*
+- git add go-musicoin/build/bin/gmc* -f
 deploy:
   provider: releases
   api_key:
