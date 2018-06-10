@@ -4,9 +4,26 @@ yarn: 1.7.0
 node_js: 8.0.0
 go: 1.10.0
 services:
-  - docker
+- docker
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-  - export PATH="$HOME/.yarn/bin:$PATH"
-after_install:
-  - yarn publish ./gmc-bin.tgz --new-version 1.0.0
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+- export PATH="$HOME/.yarn/bin:$PATH"
+before_deploy:
+- git config --local user.name "etaletai13"
+- git config --local user.email "13@etaletai.com"
+- git tag "1.0.0-beta"
+deploy:
+  provider: npm
+  email: 13@etaletai.com
+  api_key:
+    secure: doSs+L/hgcdh9UjstuPH6fHg0BrB8z9vvWaHRkMOXjlWHqxNsIKkvhsBSxzhGYyAfLaatTptW7YIjhzUI6bBMO4wqhHMIHDeST4ALj4PJa1TO7JeEjJc+I4ZyI7//D7ldj/q/k0PbUzQD7Kx7iKke+EZnFYToiV82fZnSxsJmHQVV3+3fCGdrvKKU50MRQqaye1nEFkKSI2zyXV7ZE/mgUeA+8lILvH9oAUuWsedAdBVHgPOLEs/Zr1pTuuEIlv4VUDEJkaIZUp0hSKoP8OEu2A9GiPSuH9bN9yKgwXTQssmsEp2ae8KFu9QQYvldq2uIZ8+ragl3h/xcqiPY/oLq58QRKLrpd3kgnjXJU8t3XJV+svM6kSXPYw5fhFrTiO8USvYOYwVAnrasDIb2zFC4sGdO2BOGjjQu3iTV5/iT5qx5+mOeOKC5BqXKMq+jcGkPtZ28o/6kkLMloCZWyxBPWQxUkjIiOL+ylWFdIamwp9yhQ42fL9gxSEwpvBzGjBxv/AyLQCKBWvow5wQMle9hcb+YNHmOf/hHZkWfOLgkl8ZwFCeY86cYzH7+u7rzDw0Y5ZvVW0NP+HFpQ2CpKI0grYTSVLoopLYOQKEdRcJJCan1MmWtIRt8DDgGN5OTH8n8wDFEKYiLAhKmiKqVHpwCwQAfBIbZ7/kqY03gloYlAQ=
+  on:
+    tags: true
+    repo: etaletai13/gmc-node-modules
+deploy:
+  provider: releases
+  api_key:
+    secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
+  file: "./gmc-bin.tgz"
+  on:
+    tags: true
