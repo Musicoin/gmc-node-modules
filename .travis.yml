@@ -11,15 +11,6 @@ before_install:
 before_deploy:
 - git config --local user.name "etaletai13"
 - git config --local user.email "13@etaletai.com"
-- git tag "1.0.0-beta"
-deploy:
-  provider: npm
-  email: parker.casey@gmail.com
-  api_key:
-    secure: doSs+L/hgcdh9UjstuPH6fHg0BrB8z9vvWaHRkMOXjlWHqxNsIKkvhsBSxzhGYyAfLaatTptW7YIjhzUI6bBMO4wqhHMIHDeST4ALj4PJa1TO7JeEjJc+I4ZyI7//D7ldj/q/k0PbUzQD7Kx7iKke+EZnFYToiV82fZnSxsJmHQVV3+3fCGdrvKKU50MRQqaye1nEFkKSI2zyXV7ZE/mgUeA+8lILvH9oAUuWsedAdBVHgPOLEs/Zr1pTuuEIlv4VUDEJkaIZUp0hSKoP8OEu2A9GiPSuH9bN9yKgwXTQssmsEp2ae8KFu9QQYvldq2uIZ8+ragl3h/xcqiPY/oLq58QRKLrpd3kgnjXJU8t3XJV+svM6kSXPYw5fhFrTiO8USvYOYwVAnrasDIb2zFC4sGdO2BOGjjQu3iTV5/iT5qx5+mOeOKC5BqXKMq+jcGkPtZ28o/6kkLMloCZWyxBPWQxUkjIiOL+ylWFdIamwp9yhQ42fL9gxSEwpvBzGjBxv/AyLQCKBWvow5wQMle9hcb+YNHmOf/hHZkWfOLgkl8ZwFCeY86cYzH7+u7rzDw0Y5ZvVW0NP+HFpQ2CpKI0grYTSVLoopLYOQKEdRcJJCan1MmWtIRt8DDgGN5OTH8n8wDFEKYiLAhKmiKqVHpwCwQAfBIbZ7/kqY03gloYlAQ=
-  on:
-    tags: true
-    repo: etaletai13/gmc-node-modules
 deploy:
   provider: releases
   api_key:
