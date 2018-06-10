@@ -1,26 +1,19 @@
 os: linux
 language: node_js
 yarn: 1.7.0
-node_js: 8.0.0
-go:
-- 1.10.x
+go: 1.10.x
 services:
 - docker
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
-before_deploy:
-- git config --local user.name "etaletai13"
-- git config --local user.email "13@etaletai.com"
-- git add go-musicoin/build/bin/gmc* -f
-- git commit -am "include new binaries"
-- git tag "v1.0.0-gh-$(date + '%Y%m%d%H%m')"
-- yarn pack --filename gmc-bin.tgz
 jobs:
   include:
   - stage: Github Release
     node_js: 8.0.0
-    script: echo "Creating Github Release ..."
+    script: 
+    - echo "Creating Github Release ..."
+    - yarn pack --filename gmc-bin.tgz
     deploy:
       provider: releases
       api_key:
@@ -30,7 +23,6 @@ jobs:
         on:
           tags: true
         repo: etaletai13/gmc-node-modules
-        branch: v1.0.0
   - stage: Yarn/NPM Release
     node_js: 8.0.0
     script: echo "Creating NPM Release ..."
@@ -43,4 +35,3 @@ jobs:
         on:
           tags: true
         repo: etaletai13/gmc-node-modules
-        branch: v1.0.0
