@@ -1,6 +1,6 @@
 {
   "name": "@etaletai13/gmc-bin",
-  "version": "1.5.1",
+  "version": "0.0.0",
   "description": "makes available go-musicoin binaries in node projects",
   "license": "MIT",
   "private": false,
@@ -41,6 +41,6 @@
     "build": "sh ./index.sh",
     "test": "yarn pre && yarn patch && yarn build && yarn publish",
     "prepublish": "yarn pack --filename ./gmc-bin.tgz",
-    "publish": "yarn publish ./gmc-bin.tgz --new-version 1.5.1 --tag beta"
+    "publish": "yarn publish ./gmc-bin.tgz --new-version 1.0.0 --tag beta"
   }
 }
