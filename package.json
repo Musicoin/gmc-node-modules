@@ -1,6 +1,6 @@
 {
   "name": "@etaletai13/gmc-bin",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta1",
   "description": "makes available go-musicoin binaries in node projects",
   "license": "MIT",
   "private": false,
