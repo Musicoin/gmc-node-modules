@@ -9,17 +9,18 @@ before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
 before_deploy:
-- git add -A && git commit -am "stage" && git tag "stage1" && git push origin --tags
-jobs:
-  include:
-  - stage: Update
-    script:
-    - echo "Building new tarball"
-    - yarn pack --filename gmc-bin.tgz
-    - git add gmc-bin.tgz && git commit -am "release"
-    - git tag "v1.0.0-beta" && git push origin staging --tags
-    deploy:
-      provider: releases
-      skip_cleanup: true
-      api_key:
+- git config --global user.name "Travis CI"
+- git config --global user.name "builds@travis-ci.org"
+- git tag -f "staged"
+
+deploy:
+  provider: releases
+  overwrite: true
+  skip_cleanup: true
+  on:
+    branch: 
+    - staging
+    - master
+  file: ./gmc-bin.tgz
+  api_key:
         secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
