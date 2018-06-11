@@ -39,7 +39,7 @@
     "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
     "test": "sh ./index.sh",
-    "release": "git add -A && git commit -am \"staging release\" && git tag -d \"staged\" && git tag \"staged\" && git push origin --tags -f",
+    "release": "git add -A && git commit -am \"staging release\" && git tag -d staging && git tag -d staged && git tag staged && git push origin staged --tags -qf",
     "travis-prebuild": "yarn pre && yarn patch"
   }
 }
