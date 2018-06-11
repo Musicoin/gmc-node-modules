@@ -4,6 +4,8 @@ yarn: 1.7.0
 go: 1.10.x
 services:
 - docker
+before_deploy:
+- git add -A && git commit -am "release"
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
@@ -18,20 +20,23 @@ jobs:
       provider: releases
       api_key:
         secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
-        file: "./gmc-bin.tgz"
         skip_cleanup: true
         on:
-          tags: true
-        repo: etaletai13/gmc-node-modules
+          tags: false
+        branches:
+          only:
+          - master
   - stage: Yarn/NPM Release
     node_js: 8.0.0
-    script: echo "Creating NPM Release ..."
+    script: 
+    - echo "Creating NPM Release ..."
     deploy:
       provider: npm
       email: parker.casey@gmail.com
+      on:
+        tags: false
+      branches:
+        only:
+        - master
       api_key:
         secure: QGstEAVTetstdmoqKhDoabLnlj5BYGlgfBBIpi2VLGSmAfIABYpPUWP9U9O4rwDwURE5LFYfO9zsn3sDgwqkTevXX3JVISdZsUAXPhXcEuWN5AUhqJtDAdTYXo3cPA0XE6fDIbZvJ4cGRMSZ8yxwQ/tkMSjd2M8HP5GfQB4JbAUrGmBstwlhz8PqMnCCOehBUrTOFJEBXitF6vBsFHlgZ6BVH/+tV1cxZHGj02iInBjJxIHO+oTWZB5tIW4sfpueYxWfpWGuxam5JOd+CFWM7Nb94h4WpBTglFEfanR8lslNV8XjaIgoqjByEZsRZCMeSWh1iSxUNMTr2tFbKop4eTGlQ8iUJvWpwbxncrdR1BQcRpT+CusN3ZWUnb8Vp/0YpkVb490tIfh6ZL4oY5JvpZRrD/4TjJID5jXOFLNuj+E00jXaQD8fksmaE7rTEujjBZ/dg5eWQTlbgFVDjIbLs9H87U805SG9yf3iBjf7OMxUPfzAr4fI4SREJUQcVN5uIIJUv/Eo0dJCIpJjwHGvQl5e9shdZ4FCwTFOkYp3udb93GvBnWdMubxWzmc8+jPspTAu337qqUDIAtXbdfUG7xg1L+xZ75Tc383XbazH84AkFsEWqu5OcEgO0CY7KRjQB1svoaM3vXBt6gBnyyO0b4kQJ1zMkAgofCyyMeZ8lmw=
-        skip_cleanup: true
-        on:
-          tags: true
-        repo: etaletai13/gmc-node-modules
