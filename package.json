@@ -39,6 +39,7 @@
     "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
     "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
     "build": "sh ./index.sh",
-    "prepare": "yarn pre && yarn patch && yarn build"
+    "test": "sh ./test.sh",
+    "install": "yarn pre && yarn patch && yarn build"
   }
 }
