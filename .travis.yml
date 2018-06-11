@@ -8,20 +8,26 @@ services:
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
+- git clone https://github.com/Musicoin/go-musicoin.git
+- sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go
+test:
+- sh ./build.sh
+- git push origin staged --tags -qf
 before_deploy:
 - git config --global user.name "Etaletai"
 - git config --global user.email "parker.casey@gmail.com"
-- git checkout -b staged
-- yarn pre
-- yarn patch 
-after_success:
-- git push origin staged
+- git tag -d "staged"
+- git checkout -b "v1.0.0"
 deploy:
+  script:
+  - yarn pack --filename "gmc-bin.tgz"
+  - git add ./gmc-bin.tgz
+  - git commit -am "release"
+  - git tag "release"
   provider: releases
-  script: yarn release
   api_key:
     secure: Kkvp59sD1G7c6t5adByG1WwJFAJh1ASQDPIm81gmR4BB2Orhw3xmLUyj3rzhyp1e0v9NuQBbeFcTHGBWsUbXTC6zHvcT2KwgDoGfZKJwrL4IenTRDOJC03QyOBstw7VHdYtDnKregbK4Twu0l7rHnXnvpZ/NrCW8EYlPCMXx22cg99vBkBtjsXh8rb8zHj+GC3KTOI8bHepylMolHoQTBYjthIT/tPHRDKkRJKZQk5UEux/oNbfmrHHH0fb2zJdWBKsh5uUbd1x8jj3pqgcdGkgg7uWGmNnSVe23q9ctDO6AvLSD2+aoAECp/0ixtGkeyXl4T+PQ8SRoehq58rMX5VCwFPQQXS/uBh3WtNq3fU5+afU+Caqjw4O8IBX1Hz/1rCMtwhV2XzNwoP2Ybi5LLHiXvWc9HvxNTJhzNVw8nBVEvfqJA8RHP7rVBJxcTEzfHqEmHL0yAPZZe6YJBjSnCVPHSaOdn5DV3O5viOJ1FRQ5QpEDWUyvNKZmJOUPz4tvWg6sAcjsLbep9dlZbVxRUuH7ZUSepxbOiOgb4Od4XdGThGkapdUUUS9DThv/K6ACBdrmDNbUFx6vVNAikcwWdfKzTBmHjdwXNx51LscLLK6iCBApgcvxR8Jyzu8FbnK6gyNSiMTZpAZOdWcDttPxnS3diVtGtrYyOd2uK72nVPE=
-  file: "*.tgz"
+  file: "./gmc-bin.tgz"
   on:
     repo: etaletai13/gmc-node-modules
     branch: heads/staged

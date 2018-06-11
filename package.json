@@ -35,9 +35,6 @@
     "wallet"
   ],
   "scripts": {
-    "pre": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; else yarn clean; fi",
-    "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
-    "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
-    "test": "sh ./index.sh"
+    "test": "yarn pre && yarn patch && sh ./index.sh"
   }
 }
