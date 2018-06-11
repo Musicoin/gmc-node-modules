@@ -9,10 +9,10 @@ before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
 before_deploy:
-- git config --global user.name "Travis CI"
+- git config --global user.name "Musicoin Builder"
 - git config --global user.name "builds@travis-ci.org"
 - git tag -f "staged"
-
+- git push origin staged -f --tags
 deploy:
   provider: releases
   overwrite: true
