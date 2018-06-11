@@ -11,6 +11,11 @@ before_install:
 before_deploy:
 - git config --global user.name "Etaletai"
 - git config --global user.email "parker.casey@gmail.com"
+- git checkout -b staged
+- yarn pre
+- yarn patch 
+after_success:
+- git push origin staged
 deploy:
   provider: releases
   script: yarn release
