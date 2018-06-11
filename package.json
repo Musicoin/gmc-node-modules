@@ -33,8 +33,5 @@
     "music",
     "musicoin",
     "wallet"
-  ],
-  "scripts": {
-    "test": "yarn pre && yarn patch && sh ./index.sh"
-  }
+  ]
 }
