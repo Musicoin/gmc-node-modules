@@ -10,9 +10,6 @@ before_install:
 - export PATH="$HOME/.yarn/bin:$PATH"
 - git clone https://github.com/Musicoin/go-musicoin.git
 - sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go
-test:
-- sh ./build.sh
-- git push origin staged --tags -qf
 before_deploy:
 - git config --global user.name "Etaletai"
 - git config --global user.email "parker.casey@gmail.com"
