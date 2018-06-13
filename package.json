@@ -14,15 +14,11 @@
     "type": "git",
     "url": "https://github.com/Musicoin/gmc-node-modules.git"
   },
+  "os": [ "linux", "win32", "darwin" ],
   "bin": {
-    "gmc-linux-386": "./go-musicoin/build/bin/gmc-linux-386",
-    "gmc-linux": "./go-musicoin/build/bin/gmc-linux-amd64",
-    "gmc-mac": "./go-musicoin/build/bin/gmc-darwin-10.6-amd64",
-    "gmc-windows-386": "./go-musicoin/build/bin/gmc-windows-4.0-386.exe",
-    "gmc-windows": "./go-musicoin/build/bin/gmc-windows-4.0-amd64.exe"
-  },
-  "engines": {
-    "yarn": ">=1.7.0"
+    "gmc-linux": "./bin/gmc-linux-amd64",
+    "gmc-darwin": "./bin/gmc-darwin-10.6-amd64",
+    "gmc-win32": "./bin/gmc-windows-4.0-amd64.exe"
   },
   "keywords": [
     "blockchain",
@@ -35,10 +31,6 @@
     "wallet"
   ],
   "scripts": {
-    "pre": "if ! [ -d go-musicoin ]; then git clone https://github.com/Musicoin/go-musicoin.git; else yarn clean; fi",
-    "clean": "rm -fr go-musicoin/build/_workspace/pkg/ go-musicoin/bin && if [ -f ./gmc-bin.tgz ]; then rm -f ./gmc-bin.tgz; fi",
-    "patch": "sed -i.tmp 's/1.7/1.10/g' ./go-musicoin/build/ci.go",
-    "build": "sh ./index.sh",
-    "prepublish": "yarn pre && yarn patch && yarn build"
+    "test": "ls"
   }
 }

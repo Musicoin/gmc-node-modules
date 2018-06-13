@@ -1,42 +1,58 @@
-os: linux
 language: node_js
+os: linux
+node_js: 8.0.0
 yarn: 1.7.0
-go: 1.10.x
 services:
 - docker
-before_deploy:
-- git add -A && git commit -am "release"
-before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-- export PATH="$HOME/.yarn/bin:$PATH"
+before_script:
 jobs:
   include:
+  - stage: Prebuild
+    go: 1.10.0
+    node: 8.0.0
+    yarn: 1.7.0
+    on:
+      tags: false
+      branches:
+        only: staging
+    script:
+    - git checkout -b release origin/release
+    - git merge staging
+    - echo "Building Go-Musicoin v1.0.0-${TRAVIS_BUILD_NUMBER}"
+    - rm -rf bin
+    - "./index.sh"
+    - mv ./go-musicoin/build/bin .
+    - rm -rf go-musicoin
+    after_success:
+    - git checkout staging
+    - git merge --ff release
+    - git config credential.helper "store --file=.git/credentials"
+    - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+    - git add bin/gmc-*
+    - git commit -am --fixup
+    - git tag "${TRAVIS_BUILD_NUMBER}"
+    - git push origin release --tags -f
   - stage: Github Release
-    node_js: 8.0.0
-    script: 
-    - echo "Creating Github Release ..."
-    - yarn pack --filename gmc-bin.tgz
     deploy:
       provider: releases
-      api_key:
-        secure: a12GhXxpsjgF2DRXEtKIe4h1yuzkrwf1mjtrHukgr8Aj/ood/GYYIsTCPP99ztIG8BPTrarSPFstxPw3iOUK8vb/zCua3DyH+t07bnwvi81trJu4UZKIgSKBAFzCISwHC1WXEInXcWERE7cpWuw4yfQmXIRqsv6k5Ltwp217toj9kruuWlqHfJcLL1Y9bEdPQY3PWAwY4u7TTtubUMEftvnKIUGgvhifkvYMnFWrx/jHQpHHsNgmRQXrrC3Ax4TuX/h962bJbW7Z/m+cfTg/4xYSPZ6rf6sLuOGbSoyTFCP+Kl+1VjXSuQhvGYffNByZeYRBC/sCThVXiuvpbuAvAcWwiq7WJEoycEMfkLg8aEPRJrjDzzTvBKgKjzX+T8Xa1yHmWR9CMhQnG94Z7Ymc9XoHHDfxYXoXgBTeVCpHe0V84tz5S7CHDlf5Wj18E4XzA9dhNdy35RNFjYhUg5pM81NKdwOzHwmsri+c6OLRGLTrnzcpivfvJcj/0Q9LcE7bkjhLHPhj1WL4lNnDFakUrIw3nENf6Mp58VptX4BOcPtwPaTDt2V34BZ60nqM1MXHOf3zV4mgXQ7YoWE2uePjysftN0J8kj6F4HSf+1oczx/BmRxyTB8KPLwSKPyEQ9shEs7ehC3eQbDgFkKA4RIqGR+djAOKhXLS9nLPZIw7Jyo=
-        skip_cleanup: true
-        on:
-          tags: false
+      skip_cleanup: true
+      on:
+        tags: true
         branches:
-          only:
-          - master
+          only: master
   - stage: Yarn/NPM Release
     node_js: 8.0.0
-    script: 
+    script:
     - echo "Creating NPM Release ..."
     deploy:
       provider: npm
       email: parker.casey@gmail.com
       on:
-        tags: false
-      branches:
-        only:
-        - master
+        tags: true
+        branches:
+          only: master
       api_key:
         secure: QGstEAVTetstdmoqKhDoabLnlj5BYGlgfBBIpi2VLGSmAfIABYpPUWP9U9O4rwDwURE5LFYfO9zsn3sDgwqkTevXX3JVISdZsUAXPhXcEuWN5AUhqJtDAdTYXo3cPA0XE6fDIbZvJ4cGRMSZ8yxwQ/tkMSjd2M8HP5GfQB4JbAUrGmBstwlhz8PqMnCCOehBUrTOFJEBXitF6vBsFHlgZ6BVH/+tV1cxZHGj02iInBjJxIHO+oTWZB5tIW4sfpueYxWfpWGuxam5JOd+CFWM7Nb94h4WpBTglFEfanR8lslNV8XjaIgoqjByEZsRZCMeSWh1iSxUNMTr2tFbKop4eTGlQ8iUJvWpwbxncrdR1BQcRpT+CusN3ZWUnb8Vp/0YpkVb490tIfh6ZL4oY5JvpZRrD/4TjJID5jXOFLNuj+E00jXaQD8fksmaE7rTEujjBZ/dg5eWQTlbgFVDjIbLs9H87U805SG9yf3iBjf7OMxUPfzAr4fI4SREJUQcVN5uIIJUv/Eo0dJCIpJjwHGvQl5e9shdZ4FCwTFOkYp3udb93GvBnWdMubxWzmc8+jPspTAu337qqUDIAtXbdfUG7xg1L+xZ75Tc383XbazH84AkFsEWqu5OcEgO0CY7KRjQB1svoaM3vXBt6gBnyyO0b4kQJ1zMkAgofCyyMeZ8lmw=
+env:
+  global:
+    secure: ICczZd8IZHgAI6QKe3wMX+GkpfCWf5+ytbqilcrsmVNrnWzVjhTPd0+66lFDp0Nc9AHNDh0l8PBB0TCuJj47XVEY+qy5PO6SIscYW8inYe9KVfJn9lDvQxmsKdtIpWNmbIQJtHcbP3D8/Cni5DYNHU1cOYkRqRUC/imVOgTD9J8Z6MJU5TMv8VAdGCG5PobhgDQyanh7AWcms44Mu2/tw6BQjKbdMJbaR7B0JPz/6L1eUsdz8A6Kvo54pVlo+OKRfPuWe4ZWJ6+42z72zj2Krth2jlchI97aJKoivundV/W+8zMy+krf7SwQeSGydyTJOgo2VzJXQxHsB/uk+xFQhszl+K4KzbGDrLYSORYMpqEgjtuuAJ82v9/EW405iqKBdsPsb3ZX+Ic+clRAEjdHjAQv/Jprvxv/xBI4PpgR774HxOVsQf/OwpUGaZ7Gln0/K/WDqn+G0kZGYSXAcbsqW3c6F7/mzYSZq9mYX+Xrrpw4O68K+otbFMA+ToBGETmS/wOrBHy4SVVdt1Dha6HUUE7ytmbRgUwFcKbbflXpMixB6p2RBt2WfAVxYeo6/DzaOeHtWWCYoEOa/AZUB3jNwB46g7txaoviwltccF/EI2Lev15+yTU8Gxz9fhXdw4wEAhS73ryxgXGhKbWEz5bAGcOiRpoQx//4ICVm6GUsSKI=
