@@ -23,21 +23,18 @@ jobs:
     - "./index.sh"
     - mv ./go-musicoin/build/bin .
     - rm -rf go-musicoin
-    after_success:
-    - git checkout staging
-    - git merge --ff release
-    - git config credential.helper "store --file=.git/credentials"
-    - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-    - git add bin/gmc-*
-    - git commit -am --fixup
-    - git tag "${TRAVIS_BUILD_NUMBER}"
-    - git push origin release --tags -f
   - stage: Github Release
     deploy:
       provider: releases
       skip_cleanup: true
+      script:
+      - git checkout -b release
+      - git config credential.helper "store --file=.git/credentials"
+      - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+      - git add -A
+      - git commit -am "$(TRAVIS_BUILD_NUMBER)
+      - git push origin release -f
       on:
-        tags: true
         branches:
           only: master
   - stage: Yarn/NPM Release
@@ -48,9 +45,9 @@ jobs:
       provider: npm
       email: parker.casey@gmail.com
       on:
-        tags: true
+        tags: false
         branches:
-          only: master
+          only: release
       api_key:
         secure: QGstEAVTetstdmoqKhDoabLnlj5BYGlgfBBIpi2VLGSmAfIABYpPUWP9U9O4rwDwURE5LFYfO9zsn3sDgwqkTevXX3JVISdZsUAXPhXcEuWN5AUhqJtDAdTYXo3cPA0XE6fDIbZvJ4cGRMSZ8yxwQ/tkMSjd2M8HP5GfQB4JbAUrGmBstwlhz8PqMnCCOehBUrTOFJEBXitF6vBsFHlgZ6BVH/+tV1cxZHGj02iInBjJxIHO+oTWZB5tIW4sfpueYxWfpWGuxam5JOd+CFWM7Nb94h4WpBTglFEfanR8lslNV8XjaIgoqjByEZsRZCMeSWh1iSxUNMTr2tFbKop4eTGlQ8iUJvWpwbxncrdR1BQcRpT+CusN3ZWUnb8Vp/0YpkVb490tIfh6ZL4oY5JvpZRrD/4TjJID5jXOFLNuj+E00jXaQD8fksmaE7rTEujjBZ/dg5eWQTlbgFVDjIbLs9H87U805SG9yf3iBjf7OMxUPfzAr4fI4SREJUQcVN5uIIJUv/Eo0dJCIpJjwHGvQl5e9shdZ4FCwTFOkYp3udb93GvBnWdMubxWzmc8+jPspTAu337qqUDIAtXbdfUG7xg1L+xZ75Tc383XbazH84AkFsEWqu5OcEgO0CY7KRjQB1svoaM3vXBt6gBnyyO0b4kQJ1zMkAgofCyyMeZ8lmw=
 env:
