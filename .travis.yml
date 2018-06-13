@@ -7,30 +7,25 @@ services:
 before_script:
 jobs:
   include:
-  - stage: Prebuild
+  - stage: Github Release
+    deploy:
     go: 1.10.0
     node: 8.0.0
     yarn: 1.7.0
-    on:
-      tags: false
-      branches:
-        only: staging
-    script:
-    - echo "Building Go-Musicoin v1.0.0-${TRAVIS_BUILD_NUMBER}"
-    - rm -rf bin
-    - "./index.sh"
-    - mv ./go-musicoin/build/bin .
-    - rm -rf go-musicoin
-    after_success:
-    - git config credential.helper "store --file=.git/credentials"
-    - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-    - git add -A
-    - git commit -am "${TRAVIS_BUILD_NUMBER}"
-    - git push origin master --all
-  - stage: Github Release
-    deploy:
       before_script:
       - git branch -d release
+      script:
+      - echo "Building Go-Musicoin v1.0.0-${TRAVIS_BUILD_NUMBER}"
+      - rm -rf bin
+      - "./index.sh"
+      - mv ./go-musicoin/build/bin .
+      - rm -rf go-musicoin
+      after_success:
+      - git config credential.helper "store --file=.git/credentials"
+      - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+      - git add -A
+      - git commit -am "${TRAVIS_BUILD_NUMBER}"
+      - git push origin master --all
       provider: releases
       skip_cleanup: true
       script:
