@@ -16,23 +16,26 @@ jobs:
       branches:
         only: staging
     script:
-    - git checkout -b release origin/release
-    - git merge staging
     - echo "Building Go-Musicoin v1.0.0-${TRAVIS_BUILD_NUMBER}"
     - rm -rf bin
     - "./index.sh"
     - mv ./go-musicoin/build/bin .
     - rm -rf go-musicoin
+    after_success:
+    - git config credential.helper "store --file=.git/credentials"
+    - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+    - git add -A
+    - git commit -am "${TRAVIS_BUILD_NUMBER}"
+    - git push origin master --all
   - stage: Github Release
     deploy:
+      before_script:
+      - git branch -d release
       provider: releases
       skip_cleanup: true
       script:
-      - git checkout -b release
-      - git config credential.helper "store --file=.git/credentials"
-      - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
       - git add -A
-      - git commit -am "$(TRAVIS_BUILD_NUMBER)
+      - git commit -am "$(TRAVIS_BUILD_NUMBER)"
       - git push origin release -f
       on:
         branches:
@@ -45,7 +48,6 @@ jobs:
       provider: npm
       email: parker.casey@gmail.com
       on:
-        tags: false
         branches:
           only: release
       api_key:
