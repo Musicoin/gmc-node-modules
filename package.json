@@ -12,7 +12,7 @@
   "issues": "https://github.com/Musicoin/desktop/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Musicoin/gmc-node-modules.git"
+    "url": "https://github.com/Musicoin/gmc-bin.git"
   },
   "os": [ "linux", "win32", "darwin" ],
   "bin": {
