@@ -14,11 +14,10 @@ jobs:
     - rm -rf bin
     - "./index.sh"
     after_success:
-    - mv ./go-musicoin/build/bin .
-    - rm -rf go-musicoin
+    - git add -A
     - git commit -am "${TRAVIS_BUILD_NUMBER}"
     - git tag "v1.0.0-${TRAVIS_BUILD_NUMBER}"
-    - git push origin --tags
+    - git push origin --all
   - stage: NPM Release
     script:
     - echo "Creating NPM Release ..."
