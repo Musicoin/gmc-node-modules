@@ -21,3 +21,5 @@ echo "\n\nBuilding Mac binaries"
 build/env.sh go run build/ci.go xgo -- --targets=darwin/amd64 -v ./cmd/gmc && echo "Mac compiled."
 
 cd ..
+mv go-musicoin/build/bin .
+rm -rf go-musicoin
