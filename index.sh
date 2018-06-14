@@ -2,6 +2,8 @@
 
 echo "Building Windows binaries"
 
+git clone https://github.com/Musicoin/go-musicoin
+
 cd go-musicoin
 
 build/env.sh go run build/ci.go xgo -- --targets=windows/386 -v ./cmd/gmc && echo "Windows x32 complete."
@@ -17,3 +19,5 @@ build/env.sh go run build/ci.go xgo -- --targets=linux/amd64 -v ./cmd/gmc && ech
 echo "\n\nBuilding Mac binaries"
 
 build/env.sh go run build/ci.go xgo -- --targets=darwin/amd64 -v ./cmd/gmc && echo "Mac compiled."
+
+cd ..
