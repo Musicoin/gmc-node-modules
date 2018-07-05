@@ -1,4 +1,22 @@
 language: node_js
 node_js:
-- '0.11'
-- '0.10'
+- 8.0.0
+services:
+- docker
+before_install:
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+- export PATH=$HOME/.yarn/bin:$PATH
+before_deploy:
+- rm -rf go-musicoin
+- git add -A
+deploy:
+  provider: npm
+  email: parker.casey@gmail.com
+  api_key:
+    secure: fn6+10oMUmOrNzcPQH0AKFfbEdUubTc2V8dvJHYE/w735QCq+E3gNiMu1Mqxxm9r6hXbY+IIQoaLQTrD5OWaLoEmSQE354uLPZYvZvVJD9Ii35xBQy47+2PUy+XVzk40hkQHlCWDKBFDScymJiOXP9rsHsCYxAD4aCW7iuxv8PMm4C12731/RANS5n80O75JFkxGTfM2PJ8Aw/lI7+VhGmwFm30vCPG7rZDgAwW7TWyXtmCEWaWTv4nUNk7WC0YjNpiDyij8z1HVx2/v7hoGCffwklapfDYYnspNIr+qYfQwfItqZKAPjR1eyMi7UVyIZ/HoMYQN/Wp+kjxNa4W4FFHU0vo4oOIcztBhzBY4+a33h8ZXNJwswaB5Wy5ogGPyh1rry0QqhG0TNNkUT3gZ8aQDMqNkvdKAZBLe0Yg7pCkKjFF3KX2Y+17OXUlUYO54fV9CKadIXHR3xvpBVYPstDkStR4Pwt0YQ4uIQm0aehpehfrYH6eaFe5mRUj54uB1nkZlimGAsWzEggLxxZP7KW731QzTksePFBubNTZiFSb/awOjx1aeefDHud4ADs3mNm5MWW/DD5ly7oq4UkqqyJeZ/jVaYtt/3TVNFjP5ljV0zv24qlciCu9fijBWeyaqiwtTlVFcP5N7dP5+MG3CU/bI9C9tAZX92i1uJXvgG4U=
+  on:
+    tags: true
+    repo: etaletai13/gmc-bin
+    branch: 
+      only:
+        - release
