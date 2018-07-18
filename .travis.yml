@@ -3,9 +3,11 @@ node_js:
 - 8.0.0
 services:
 - docker
-before_install:
+before_script:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH=$HOME/.yarn/bin:$PATH
+script:
+- yarn before-install
 before_deploy:
 - rm -rf go-musicoin
 - git add -A
