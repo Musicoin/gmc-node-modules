@@ -1,6 +1,6 @@
 {
   "name": "gmc-bin-prebuilts",
-  "version": "1.0.0-beta5",
+  "version": "1.0.0-beta6",
   "description": "makes available go-musicoin binaries in node projects",
   "license": "MIT",
   "private": false,
