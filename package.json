@@ -14,11 +14,6 @@
     "type": "git",
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
-  "bin": [
-    "./bin/gmc-darwin-10.6-386","./bin/gmc-darwin-10.6-amd64",
-    "./bin/gmc-linux-386","./bin/gmc-linux-amd64",
-    "./bin/gmc-windows-4.0-386.exe","./bin/gmc-windows-4.0-amd64.exe"
-  ],
   "keywords": [
     "blockchain",
     "crypto",
@@ -30,15 +25,12 @@
     "wallet"
   ],
   "scripts": {
-    "preinstall": "yarn clone && yarn build && mv go-musicoin/build/bin .",
+    "before-install": "yarn clone && yarn build && mv go-musicoin/build/bin .",
     "clone": "git clone https://github.com/Musicoin/go-musicoin",
-    "build": "yarn build.darwin/386 && yarn build.darwin/amd64 && yarn build.windows/386 && yarn build.windows/amd64 && yarn build.linux/386 && yarn build.linux/amd64",
-    "build.darwin/386": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin/386 -v ./cmd/gmc",
+    "build": "yarn build.darwin/amd64 && yarn build.windows/amd64 && yarn build.linux/amd64",
     "build.darwin/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin/amd64 -v ./cmd/gmc",
-    "build.windows/386": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=windows/386 -v ./cmd/gmc",
     "build.windows/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=windows/amd64 -v ./cmd/gmc",
-    "build.linux/386": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/386 -v ./cmd/gmc",
     "build.linux/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc",
-    "test": "ls ./bin/gmc-*"
+    "test": "rm -f ./bin/xgo & ls ./bin/gmc-*"
   }
 }
