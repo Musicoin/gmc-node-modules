@@ -7,6 +7,8 @@ before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
 - export PATH="$HOME/.yarn/bin:$PATH"
 - yarn before-install
+before_deploy:
+- sudo chmod a+x bin/*
 deploy:
   provider: npm
   email: parker.casey@gmail.com
