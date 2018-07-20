@@ -8,12 +8,11 @@ before_install:
 - export PATH="$HOME/.yarn/bin:$PATH"
 - yarn before-install
 deploy:
-  provider: releases
-  api_key: ${GH_TOKEN}
+  provider: npm
+  email: parker.casey@gmail.com
+  api_key: ${NPM_TOKEN}
   skip_cleanup: true
-  file_glob: true
-  file: 
-  - "**/*"
   on:
+    tags: true
     repo: etaletai13/gmc-bin
-    branch: master
+    branch: npm
