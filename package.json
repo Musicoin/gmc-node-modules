@@ -14,6 +14,11 @@
     "type": "git",
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
+  "bin": {
+    "gmc-lin": "bin/gmc-linux-x64",
+    "gmc-mac": "bin/gmc-darwin-10.6-amd64",
+    "gmc-win": "bin/gmc-windows-4.0-amd64.exe"
+  },
   "keywords": [
     "blockchain",
     "crypto",
@@ -31,6 +36,6 @@
     "build.darwin/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin/amd64 -v ./cmd/gmc",
     "build.windows/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=windows/amd64 -v ./cmd/gmc",
     "build.linux/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc",
-    "test": "rm -f ./bin/xgo & ls ./bin/gmc-*"
+    "test": "rm -f ./bin/xgo & ls ./bin/gmc-* && chmod +x bin/gmc*"
   }
 }
