@@ -8,7 +8,7 @@ install:
 script:
   - node ./clone
   - chmod +x ./src/build/env.sh
-  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux -v ./cmd/gmc"
+  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux -v ./cmd/gmc
 before_deploy:
   - chmod a+x bin/gmc-linux-amd64
 deploy:
