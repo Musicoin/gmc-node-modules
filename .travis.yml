@@ -11,12 +11,14 @@ script:
   - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc
   - sudo chmod a+x build/bin/gmc-linux-amd64
   - mv build/bin/gmc-linux-amd64 ../gmc
+  - cd .. && rm -rf clone src .* node_modules
 deploy:
   provider: npm
   email: parker.casey@gmail.com
   api_key: ${NPM_TOKEN}
   skip_cleanup: true
-  files: ./gmc ./package.json
+  file_globs: true
+  files: *
   on:
     repo: etaletai13/gmc-bin
     branch: npm-linux
