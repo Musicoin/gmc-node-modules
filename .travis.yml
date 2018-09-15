@@ -8,10 +8,9 @@ install:
 script:
   - node ./clone
   - chmod +x ./src/build/env.sh
-  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux -v ./cmd/gmc
-before_deploy:
-  - mv src/build/bin .
-  - chmod a+x bin/*
+  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc
+  - chmod build/bin/gmc-linux-amd64
+  - mv build/bin ..
 deploy:
   provider: npm
   email: parker.casey@gmail.com
