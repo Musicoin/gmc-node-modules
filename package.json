@@ -1,6 +1,6 @@
 {
   "name": "gmc-linux",
-  "version": "1.1.0-beta1",
+  "version": "2.0.0-alpha1",
   "description": "makes available gmc binaries in node projects",
   "license": "MIT",
   "private": false,
@@ -17,6 +17,8 @@
   "bin": {
     "gmc": "bin/gmc-linux-amd64"
   },
+  "os": ["linux"],
+  "cpu": ["x64"],
   "keywords": [
     "blockchain",
     "crypto",

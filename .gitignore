@@ -1,1 +1,4 @@
-go-musicoin/
+clone/
+node_modules/
+src/
+yarn-error.log

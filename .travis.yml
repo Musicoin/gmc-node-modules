@@ -1,13 +1,14 @@
 os: linux
+dist: trusty
 services: docker
 language: node_js
-node_js: 8.9.0
+node_js: stable
 install:
   - yarn --link-duplicates
 script:
   - node ./clone
   - chmod +x ./src/build/env.sh
-  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin -v ./cmd/gmc"
+  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux -v ./cmd/gmc"
 before_deploy:
   - chmod a+x bin/gmc-linux-amd64
 deploy:
@@ -15,9 +16,6 @@ deploy:
   email: parker.casey@gmail.com
   api_key: ${NPM_TOKEN}
   skip_cleanup: true
-  files: 
-  - "package.json"
-  - "bin/gmc-linux-amd64",
   on:
     repo: etaletai13/gmc-bin
     branch: npm-linux
