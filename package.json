@@ -15,7 +15,7 @@
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
   "bin": {
-    "gmc": "bin/gmc-linux-amd64"
+    "gmc": "./gmc"
   },
   "os": ["linux"],
   "cpu": ["x64"],
