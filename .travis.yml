@@ -13,7 +13,7 @@ script:
   - sudo chmod a+x build/bin/gmc-linux-amd64
   - mv build/bin/gmc-linux-amd64 ../gmc
   - cd ..
-  - rm -rf src
+  - rm -rf clone src node_modules .travis.yml .git*
 deploy:
   provider: npm
   email: parker.casey@gmail.com
