@@ -9,7 +9,7 @@ script:
   - node ./clone
   - chmod +x ./src/build/env.sh
   - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc
-  - chmod build/bin/gmc-linux-amd64
+  - chmod a+x build/bin/gmc-linux-amd64
   - mv build/bin ..
 deploy:
   provider: npm
