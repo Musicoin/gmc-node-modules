@@ -2,14 +2,14 @@ os: linux
 services: docker
 language: node_js
 node_js: 8.9.0
-script:
+install:
   - yarn --link-duplicates
+script:
   - node ./clone
-  - cd src
-  - chmod +x build/env.sh
-  - build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin -v ./cmd/gmc",
+  - chmod +x ./src/build/env.sh
+  - cd src && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin -v ./cmd/gmc"
 before_deploy:
-  - chmod a+x bin/*
+  - chmod a+x bin/gmc-linux-amd64
 deploy:
   provider: npm
   email: parker.casey@gmail.com
