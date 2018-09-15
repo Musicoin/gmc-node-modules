@@ -1,17 +1,23 @@
 os: linux
+services: docker
 language: node_js
 node_js: 8.9.0
-before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-- export PATH="$HOME/.yarn/bin:$PATH"
+script:
+  - yarn --link-duplicates
+  - node ./clone
+  - cd src
+  - chmod +x build/env.sh
+  - build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin -v ./cmd/gmc",
 before_deploy:
-- sudo chmod a+x bin/*
+  - chmod a+x bin/*
 deploy:
   provider: npm
   email: parker.casey@gmail.com
   api_key: ${NPM_TOKEN}
   skip_cleanup: true
-  files: "**/*"
+  files: 
+  - "package.json"
+  - "bin/gmc-linux-amd64",
   on:
     repo: etaletai13/gmc-bin
-    branch: npm
+    branch: npm-linux

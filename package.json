@@ -1,7 +1,7 @@
 {
-  "name": "gmc-bin-prebuilts",
+  "name": "gmc-linux-amd64",
   "version": "1.1.0-beta1",
-  "description": "makes available go-musicoin binaries in node projects",
+  "description": "makes available gmc binaries in node projects",
   "license": "MIT",
   "private": false,
   "homepage": "https://musicoin.org",
@@ -15,7 +15,6 @@
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
   "bin": {
-    "gmc-lin": "bin/gmc-linux-amd64",
     "gmc-mac": "bin/gmc-darwin-10.6-amd64",
     "gmc-win": "bin/gmc-windows-4.0-amd64.exe"
   },
@@ -30,12 +29,6 @@
     "wallet"
   ],
   "scripts": {
-    "before-install": "yarn clone && yarn build && rm -rf bin && mv go-musicoin/build/bin .",
-    "clone": "node ./clone",
-    "build": "yarn build.darwin/amd64 && yarn build.windows/amd64 && yarn build.linux/amd64",
-    "build.darwin/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin/amd64 -v ./cmd/gmc",
-    "build.windows/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=windows/amd64 -v ./cmd/gmc",
-    "build.linux/amd64": "cd go-musicoin && build/env.sh go run build/ci.go xgo -- --go=latest --targets=linux/amd64 -v ./cmd/gmc",
     "test": "rm -f ./bin/xgo & ls ./bin/gmc-*"
   },
   "devDependencies": {
