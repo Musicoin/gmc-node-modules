@@ -144,7 +144,7 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-github-download@~0.5.0:
+github-download@latest:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/github-download/-/github-download-0.5.0.tgz#f7647a70aac4326fb091e5786c8f66ae157da51b"
   dependencies:
