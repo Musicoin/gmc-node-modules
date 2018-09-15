@@ -1,5 +1,5 @@
 {
-  "name": "gmc-linux-amd64",
+  "name": "gmc-linux",
   "version": "1.1.0-beta1",
   "description": "makes available gmc binaries in node projects",
   "license": "MIT",
@@ -15,8 +15,7 @@
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
   "bin": {
-    "gmc-mac": "bin/gmc-darwin-10.6-amd64",
-    "gmc-win": "bin/gmc-windows-4.0-amd64.exe"
+    "bin/gmc-linux-amd64"
   },
   "keywords": [
     "blockchain",
@@ -29,7 +28,7 @@
     "wallet"
   ],
   "scripts": {
-    "test": "rm -f ./bin/xgo & ls ./bin/gmc-*"
+    "test": "./bin/gmc-linux-amd64 -v"
   },
   "devDependencies": {
     "github-download": "~0.5.0"
