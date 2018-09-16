@@ -9,9 +9,9 @@ script:
   - node ./clone
   - chmod +x ./src/build/env.sh
   - cd src
-  - build/env.sh go run build/ci.go xgo -- --go=latest --targets=windows/386 -v ./cmd/gmc
-  - sudo chmod a+x build/bin/gmc-windows-386.exe
-  - mv build/bin/gmc-windows-386.exe ../gmc
+  - build/env.sh go run build/ci.go xgo -- --go=latest --targets=darwin/amd64 -v ./cmd/gmc
+  - sudo chmod a+x build/bin/gmc-*
+  - mv build/bin/gmc-* ../gmc
   - cd ..
   - rm -rf clone src node_modules .travis.yml .git*
 deploy:

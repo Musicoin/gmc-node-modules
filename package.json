@@ -18,7 +18,7 @@
     "gmc": "./gmc"
   },
   "os": ["darwin"],
-  "cpu": ["amd64"],
+  "cpu": ["x64"],
   "keywords": [
     "blockchain",
     "crypto",
