@@ -1,5 +1,5 @@
 {
-  "name": "gmc-darwin",
+  "name": "gmc-bin",
   "version": "2.0.0-alpha1",
   "description": "makes available gmc binaries in node projects",
   "license": "MIT",
@@ -14,11 +14,12 @@
     "type": "git",
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
-  "bin": {
-    "gmc": "./gmc"
+  "optionalDependencies": {
+    "gmc-linux": "^2.0.0-alpha1",
+    "gmc-linux-x86": "^2.0.0-alpha1",
+    "gmc-windows": "^2.0.0-alpha1",
+    "gmc-windows-x86": "^2.0.0-alpha1"
   },
-  "os": ["darwin"],
-  "cpu": ["x64"],
   "keywords": [
     "blockchain",
     "crypto",
@@ -28,11 +29,5 @@
     "music",
     "musicoin",
     "wallet"
-  ],
-  "scripts": {
-    "test": "ls ./bin/"
-  },
-  "devDependencies": {
-    "github-download": "latest"
-  }
+  ]
 }
