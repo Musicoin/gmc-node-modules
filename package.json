@@ -15,10 +15,15 @@
     "url": "https://github.com/Musicoin/gmc-bin.git"
   },
   "optionalDependencies": {
+    "gmc-darwin": "^2.0.0-alpha1",
+    "gmc-darwin-x86": "^2.0.0-alpha1",
     "gmc-linux": "^2.0.0-alpha1",
     "gmc-linux-x86": "^2.0.0-alpha1",
     "gmc-windows": "^2.0.0-alpha1",
     "gmc-windows-x86": "^2.0.0-alpha1"
+  },
+  "scripts": {
+    "test": "yarn gmc version"
   },
   "keywords": [
     "blockchain",

@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+gmc-darwin-x86@^2.0.0-alpha1:
+  version "2.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/gmc-darwin-x86/-/gmc-darwin-x86-2.0.0-alpha1.tgz#0dcb074acde4d5dc47e345ff2e656b0975892ecf"
+
+gmc-darwin@^2.0.0-alpha1:
+  version "2.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/gmc-darwin/-/gmc-darwin-2.0.0-alpha1.tgz#5720170565b9b4b931450419ff83592e6d0af896"
+
 gmc-linux-x86@^2.0.0-alpha1:
   version "2.0.0-alpha1"
   resolved "https://registry.yarnpkg.com/gmc-linux-x86/-/gmc-linux-x86-2.0.0-alpha1.tgz#48aec6134307606d9a4c014075e2a26b1f4e2dba"
